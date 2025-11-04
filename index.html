@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NUS DID Class of 2013 Reunion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0f1020; --bg2:#121431; --ink:#e8f1ff; --muted:#a7b1c2; --accent:#4de1ff; --accent2:#b388ff; --success:#27d17f; --danger:#ff6b6b; --gold:#ffd166;
+      --card:#171a3a; --card2:#0f1330; --line:rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;color:var(--ink);background:radial-gradient(1200px 600px at 10% 10%, #1a204a 0%, rgba(26,32,74,0) 60%),
+              radial-gradient(900px 500px at 90% 20%, #19324d 0%, rgba(25,50,77,0) 60%),
+              linear-gradient(180deg, var(--bg1), var(--bg2));
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    a{color:var(--accent)}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:linear-gradient(135deg,rgba(77,225,255,.08),rgba(179,136,255,.06));
+      padding:40px 28px;backdrop-filter:blur(6px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:12px;background:conic-gradient(from 120deg, var(--accent), var(--accent2), #6ee7ff, var(--accent));
+      box-shadow:inset 0 0 14px rgba(255,255,255,.4),0 6px 18px rgba(0,0,0,.3)}
+    h1{font-family:Rajdhani,Inter,sans-serif;font-weight:700;letter-spacing:.5px;margin:0;font-size:clamp(26px,5vw,44px)}
+    .tagline{margin:10px 0 0;color:var(--muted);font-size:clamp(14px,2.2vw,18px)}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;margin-top:26px}
+    .pill{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:rgba(255,255,255,.03)}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .meta .item{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)}
+    .big{font-size:20px;font-weight:700}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{appearance:none;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:linear-gradient(180deg,#1c204a,#121533);
+         color:var(--ink);font-weight:600;cursor:pointer}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(180deg,#1ad4ff,#4b5cff);color:#0b1027;border:0;font-weight:700}
+    .btn.ghost{background:transparent}
+
+    /* Sections */
+    section{margin-top:40px}
+    h2{font-family:Rajdhani,Inter,sans-serif;font-size:clamp(20px,3.5vw,28px);margin:0 0 14px}
+    .grid{display:grid;gap:16px}
+    .two{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.two,.three{grid-template-columns:1fr}}
+
+    .card{border:1px solid var(--line);border-radius:16px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));box-shadow:0 8px 18px rgba(0,0,0,.2)}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .muted{color:var(--muted)}
+    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .list li{display:flex;gap:10px;align-items:flex-start}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:7px}
+
+    /* Timeline */
+    .timeline{position:relative;padding-left:20px}
+    .timeline:before{content:"";position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),var(--accent2))}
+    .t{margin-bottom:12px}
+    .t .time{font-weight:700;color:var(--accent)}
+
+    /* Menu badges */
+    .badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.03);font-size:12px}
+
+    /* Footer */
+    footer{margin:40px 0 10px;color:var(--muted);text-align:center;font-size:12px}
+
+    /* RSVP modal */
+    dialog{border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;background:linear-gradient(180deg,#161a3a,#0e1230);color:var(--ink)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input,select,textarea{width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);background:#0c1030;color:var(--ink)}
+    label{font-size:12px;color:var(--muted)}
+    .ok{color:var(--success)}.no{color:var(--danger)}
+
+    /* Subtle accent borders */
+    .glow{position:relative}
+    .glow:after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(77,225,255,.5),rgba(179,136,255,.5));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero glow">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>NUS DID Class of 2013 Reunion</h1>
+          <p class="tagline">A warm dinner, friendly games, and a night of stories. Bring your laughter, your plus one is welcome.</p>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="pill" aria-live="polite">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 11l5 5L22 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="count-text">Countdown starts after date is set</span>
+          </div>
+          <div class="meta">
+            <div class="item"><div class="muted">Date</div><div class="big" id="dateLabel">TBD, December 2025</div></div>
+            <div class="item"><div class="muted">Time</div><div class="big">6:30 pm to 10:00 pm</div></div>
+            <div class="item"><div class="muted">Venue</div><div class="big">To be confirmed, central location</div></div>
+          </div>
+          <div class="cta">
+            <button class="btn primary" id="rsvpOpen">RSVP Now</button>
+            <a class="btn ghost" href="#program">View Program</a>
+            <a class="btn ghost" href="#games">See Games</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>What to expect</h3>
+          <ul class="list">
+            <li><span class="dot"></span><span>Welcome reception with name pins and a quick icebreaker that forms tables in a fun way</span></li>
+            <li><span class="dot"></span><span>Three course dinner, tea and coffee included</span></li>
+            <li><span class="dot"></span><span>Team games, a design sketch-off, and a tiny product challenge</span></li>
+            <li><span class="dot"></span><span>Memory Wall and a live photo mosaic, submit one throwback photo</span></li>
+            <li><span class="dot"></span><span>Mini awards that celebrate quirks, voted on the spot</span></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section id="program">
+      <h2>Program</h2>
+      <div class="card timeline">
+        <div class="t"><div class="time">6:30 pm</div><div>Doors open, registration, welcome drink</div></div>
+        <div class="t"><div class="time">7:00 pm</div><div>Table match icebreaker and roll call</div></div>
+        <div class="t"><div class="time">7:20 pm</div><div>Starters served, Memory Wall opens</div></div>
+        <div class="t"><div class="time">7:45 pm</div><div>Game 1, The Design Prompt, 10 minutes of quick sketches</div></div>
+        <div class="t"><div class="time">8:05 pm</div><div>Mains served, open mic for 60 second updates</div></div>
+        <div class="t"><div class="time">8:45 pm</div><div>Game 2, Tiny Product Sprint, teams craft a paper prototype</div></div>
+        <div class="t"><div class="time">9:15 pm</div><div>Mini awards, photo slideshow, group photo</div></div>
+        <div class="t"><div class="time">9:40 pm</div><div>Dessert and coffee, free mingle</div></div>
+        <div class="t"><div class="time">10:00 pm</div><div>Goodbyes and after-party option nearby</div></div>
+      </div>
+    </section>
+
+    <section id="dinner">
+      <h2>Dinner Menu, sample</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3>Starters</h3>
+          <ul class="list">
+            <li><span class="dot"></span><span>Citrus salad with toasted seeds <span class="badge">veg</span></span></li>
+            <li><span class="dot"></span><span>Tomato bisque with basil oil <span class="badge">veg</span></span></li>
+            <li><span class="dot"></span><span>Smoked chicken crostini</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mains</h3>
+          <ul class="list">
+            <li><span class="dot"></span><span>Lemon thyme chicken with roasted roots</span></li>
+            <li><span class="dot"></span><span>Teriyaki salmon with sesame greens</span></li>
+            <li><span class="dot"></span><span>Mushroom steak with miso glaze <span class="badge">vegan</span></span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Sweet things</h3>
+          <ul class="list">
+            <li><span class="dot"></span><span>Dark chocolate tart with sea salt</span></li>
+            <li><span class="dot"></span><span>Yuzu panna cotta</span></li>
+            <li><span class="dot"></span><span>Seasonal fruit plate <span class="badge">gf</span></span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:10px">Final menu depends on venue, dietary requests are welcome.</p>
+    </section>
+
+    <section id="games">
+      <h2>Games and micro-events</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Design Prompt Speed Round</h3>
+          <p class="muted">Each table gets the same quirky brief, sketch fast, cheer louder. Gallery walk follows, everyone places a sticker vote.</p>
+        </div>
+        <div class="card">
+          <h3>Tiny Product Sprint</h3>
+          <p class="muted">Paper, tape, markers. Build a small thing that solves a funny problem. Judges pick winners for wit, craft, and charm.</p>
+        </div>
+        <div class="card">
+          <h3>Memory Wall</h3>
+          <p class="muted">Bring one photo from 2009 to 2013, we print and pin. Add a sticky note with a caption that only your studio would get.</p>
+        </div>
+        <div class="card">
+          <h3>Mini Awards</h3>
+          <p class="muted">Sweetest Prototype Fail, Most Unreadable Handwriting, Most Loyal to Pantone 021, and more. Prizes are playful.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tickets">
+      <h2>Tickets and headcount</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Target</h3>
+          <p class="muted">We aim for at least 25 attendees with most from the 2013 cohort. Family and teachers are welcome after we reach the base count.</p>
+          <ul class="list" style="margin-top:8px">
+            <li><span class="dot" style="background:var(--success)"></span><span>Early bird alumni, sample 58 SGD</span></li>
+            <li><span class="dot" style="background:var(--gold)"></span><span>Standard alumni, sample 68 SGD</span></li>
+            <li><span class="dot" style="background:var(--accent2)"></span><span>Plus one or guest, sample 68 SGD</span></li>
+          </ul>
+          <p class="muted">Actual pricing depends on the final venue, sponsors may offset costs.</p>
+        </div>
+        <div class="card">
+          <h3>How to RSVP</h3>
+          <ol class="list" style="gap:8px">
+            <li><span class="dot"></span><span>Click RSVP and leave your details</span></li>
+            <li><span class="dot"></span><span>Pick your meal preference and any allergies</span></li>
+            <li><span class="dot"></span><span>Tell us if you have a song request or award idea</span></li>
+          </ol>
+          <div class="cta"><button class="btn primary" id="rsvpOpen2">RSVP</button><a class="btn" href="#faq">Questions</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="venue">
+      <h2>Venue, to be confirmed</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Shortlist</h3>
+          <ul class="list">
+            <li><span class="dot"></span><span>Central restaurant with private room, near MRT</span></li>
+            <li><span class="dot"></span><span>Campus option for a familiar vibe</span></li>
+            <li><span class="dot"></span><span>Gallery loft with catering</span></li>
+          </ul>
+          <p class="muted">We will confirm once headcount is clearer.</p>
+        </div>
+        <div class="card">
+          <h3>Getting there</h3>
+          <p class="muted">Public transport is preferred. Parking and drop off details will be listed with the final address.</p>
+          <div class="badge" style="margin-top:8px">Wheelchair friendly access planned</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Dress code</h3>
+          <p class="muted">Studio smart. Dress for photos, add a small orange or blue accent if you like.</p>
+        </div>
+        <div class="card">
+          <h3>Photos and privacy</h3>
+          <p class="muted">There will be a group photo. Tell us if you prefer no face in public posts, we will honor that request.</p>
+        </div>
+        <div class="card">
+          <h3>Refunds</h3>
+          <p class="muted">If plans change, transfer your ticket to a classmate. We will help match.</p>
+        </div>
+        <div class="card">
+          <h3>Kids</h3>
+          <p class="muted">Family friendly venue in mind. High chairs on request, kids menu where possible.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contribute">
+      <h2>Contribute a memory</h2>
+      <div class="card">
+        <p class="muted">Send a photo, a 15 second clip, or a short note. We will add it to the slideshow and the Memory Wall.</p>
+        <div class="cta"><a class="btn" href="https://forms.gle/example" target="_blank" rel="noopener">Upload memory</a></div>
+      </div>
+    </section>
+
+    <footer>
+      Planned by the Class of 2013 volunteers. Questions, write to <a href="mailto:hello@example.com">hello@example.com</a>.
+      <div style="margin-top:6px">This page stores only your RSVP inputs during this visit.</div>
+    </footer>
+  </div>
+
+  <!-- RSVP Modal -->
+  <dialog id="rsvpModal">
+    <form method="dialog" class="wrap" style="max-width:560px">
+      <h2 style="margin-bottom:8px">RSVP</h2>
+      <p class="muted" style="margin-top:0">Thank you for helping us plan. Fields with * are required.</p>
+      <div class="row">
+        <div>
+          <label for="name">Full name *</label>
+          <input id="name" required placeholder="Your name" />
+        </div>
+        <div>
+          <label for="email">Email *</label>
+          <input id="email" type="email" required placeholder="you@example.com" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="role">I am</label>
+          <select id="role">
+            <option>Alumni</option>
+            <option>Plus one</option>
+            <option>Teacher</option>
+          </select>
+        </div>
+        <div>
+          <label for="meal">Meal preference</label>
+          <select id="meal">
+            <option>No preference</option>
+            <option>Chicken</option>
+            <option>Fish</option>
+            <option>Vegetarian</option>
+            <option>Vegan</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <label for="note">Notes, allergy, song request</label>
+        <textarea id="note" rows="3" placeholder="Tell us anything that helps"></textarea>
+      </div>
+      <div class="cta" style="margin-top:14px;justify-content:flex-end">
+        <button class="btn" value="cancel">Close</button>
+        <button class="btn primary" id="saveRsvp" value="default">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    // Simple countdown placeholder
+    const dateLabel = document.getElementById('dateLabel');
+    const countText = document.getElementById('count-text');
+    let targetDate = null; // set later when confirmed
+    function setCountdown(){
+      if(!targetDate){ countText.textContent = 'Countdown starts after date is set'; return; }
+      const now = new Date();
+      const diff = targetDate - now;
+      if(diff <= 0){ countText.textContent = 'It is reunion night, see you soon'; return; }
+      const d = Math.floor(diff/86400000), h = Math.floor(diff%86400000/3600000);
+      countText.textContent = d + ' days, ' + h + ' hours to go';
+    }
+    setInterval(setCountdown, 1000*60);
+
+    // RSVP modal with localStorage draft
+    const dlg = document.getElementById('rsvpModal');
+    const openBtns = [document.getElementById('rsvpOpen'), document.getElementById('rsvpOpen2')].filter(Boolean);
+    openBtns.forEach(b=>b&&b.addEventListener('click', ()=>dlg.showModal()));
+    const saveBtn = document.getElementById('saveRsvp');
+    saveBtn?.addEventListener('click', () => {
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        role: document.getElementById('role').value,
+        meal: document.getElementById('meal').value,
+        note: document.getElementById('note').value.trim(),
+        ts: new Date().toISOString()
+      };
+      if(!data.name || !data.email){ alert('Please fill in name and email'); return; }
+      localStorage.setItem('nusdid2013_rsvp_draft', JSON.stringify(data));
+      alert('Saved locally. We will email once the final venue is confirmed.');
+    });
+
+    // Restore draft if present
+    try{
+      const raw = localStorage.getItem('nusdid2013_rsvp_draft');
+      if(raw){
+        const d = JSON.parse(raw);
+        if(d.name) document.getElementById('name').value = d.name;
+        if(d.email) document.getElementById('email').value = d.email;
+        if(d.role) document.getElementById('role').value = d.role;
+        if(d.meal) document.getElementById('meal').value = d.meal;
+        if(d.note) document.getElementById('note').value = d.note;
+      }
+    }catch(e){}
+
+    // Nice keyboard close for dialog
+    window.addEventListener('keydown', e=>{ if(e.key==='Escape' && dlg.open) dlg.close(); });
+  </script>
+</body>
+</html>
+s
